@@ -1,295 +1,611 @@
 {
-  "openapi" : "3.1.0",
-  "components" : {
-    "schemas" : {
-      "ClientInfo" : {
-        "type" : "object",
-        "required" : [ "app_customer_id", "client_ip", "device_id", "device_os", "device_os_version", "device_brand", "device_model", "app_version" ],
-        "properties" : {
-          "app_customer_id" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "client_ip" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "device_id" : {
-            "type" : "string",
-            "pattern" : "\\S",
-            "minLength" : 10,
-            "maxLength" : 50
-          },
-          "device_os" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "device_os_version" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "device_brand" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "device_model" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "app_version" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          }
-        }
-      },
-      "CustomerCmsInfo" : {
-        "type" : "object",
-        "required" : [ "schema", "customer_id" ],
-        "properties" : {
-          "schema" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "customer_id" : {
-            "type" : "string",
-            "pattern" : "\\S"
-          },
-          "branch_id" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+  "openapi": "3.1.0",
+  "components": {
+    "schemas": {
+      "AppointmentListRequest": {
+        "type": "object",
+        "required": [
+          "customer_cms_info",
+          "client_info"
+        ],
+        "properties": {
+          "customer_cms_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerCmsInfo"
             }
           },
-          "comparisonKey" : {
-            "type" : "string"
+          "client_info": {
+            "$ref": "#/components/schemas/ClientInfo"
           }
         }
       },
-      "LoginRequest" : {
-        "type" : "object",
-        "properties" : {
-          "username" : {
-            "type" : "string"
+      "ClientInfo": {
+        "type": "object",
+        "required": [
+          "app_customer_id",
+          "client_ip",
+          "device_id",
+          "device_os",
+          "device_os_version",
+          "device_brand",
+          "device_model",
+          "app_version"
+        ],
+        "properties": {
+          "app_customer_id": {
+            "type": "string",
+            "pattern": "\\S"
           },
-          "password" : {
-            "type" : "string"
+          "client_ip": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "device_id": {
+            "type": "string",
+            "pattern": "\\S",
+            "minLength": 10,
+            "maxLength": 50
+          },
+          "device_os": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "device_os_version": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "device_brand": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "device_model": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "app_version": {
+            "type": "string",
+            "pattern": "\\S"
           }
         }
       },
-      "ResponseObject" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "msg" : {
-            "type" : "string"
-          },
-          "desc" : {
-            "type" : "string"
-          },
-          "timestamp" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "time" : {
-            "type" : "string"
-          },
-          "data" : { }
-        }
-      },
-      "TreatmentListRequest" : {
-        "type" : "object",
-        "required" : [ "customer_cms_info", "client_info" ],
-        "properties" : {
-          "customer_cms_info" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/CustomerCmsInfo"
+      "ClinicRequest": {
+        "type": "object",
+        "required": [
+          "customer_cms_info",
+          "client_info"
+        ],
+        "properties": {
+          "customer_cms_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerCmsInfo"
             }
           },
-          "client_info" : {
-            "$ref" : "#/components/schemas/ClientInfo"
+          "client_info": {
+            "$ref": "#/components/schemas/ClientInfo"
+          }
+        }
+      },
+      "CustomerCmsInfo": {
+        "type": "object",
+        "required": [
+          "schema",
+          "customer_id"
+        ],
+        "properties": {
+          "schema": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "customer_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "branch_id": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "time": {
+            "type": "string"
+          },
+          "data": {}
+        }
+      },
+      "TreatmentListRequest": {
+        "type": "object",
+        "required": [
+          "customer_cms_info",
+          "client_info"
+        ],
+        "properties": {
+          "customer_cms_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerCmsInfo"
+            }
+          },
+          "client_info": {
+            "$ref": "#/components/schemas/ClientInfo"
           }
         }
       }
     },
-    "securitySchemes" : {
-      "SecurityScheme" : {
-        "type" : "http",
-        "scheme" : "bearer",
-        "bearerFormat" : "JWT",
-        "description" : "Authentication"
+    "securitySchemes": {
+      "SecurityScheme": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Authentication"
       }
     }
   },
-  "paths" : {
-    "/api/auth/login" : {
-      "post" : {
-        "summary" : "API 0: API使用者登入",
-        "description" : "提供外部API使用端登入取得token，以利後續API使用",
-        "parameters" : [ {
-          "description" : "API的基本驗證字串，會由Senova同仁提供",
-          "example" : "f504bcc7a6a42750331d3c2d23703b2b",
-          "in" : "header",
-          "name" : "Auth",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+  "paths": {
+    "/api/appointment/list": {
+      "post": {
+        "summary": "API 2: 我的預約列表",
+        "description": "透過 customer_id 取得預約的列表資料, 若有指定診所id（branches_id array） 需要搜尋對應診所",
+        "parameters": [
+          {
+            "description": "API的基本驗證字串，會由Senova同仁提供",
+            "example": "f504bcc7a6a42750331d3c2d23703b2b",
+            "in": "header",
+            "name": "Auth",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        } ],
-        "requestBody" : {
-          "description" : "透過username, password登入取得token，以利後續API使用",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/LoginRequest"
+        ],
+        "requestBody": {
+          "description": "透過 customer_id 取得預約的列表資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppointmentListRequest"
               }
             }
           },
-          "required" : true
+          "required": true
         },
-        "responses" : {
-          "200" : {
-            "description" : "登入成功，回傳token，data欄位的值為token",
-            "content" : {
-              "application/json" : {
-                "examples" : {
-                  "執行成功" : {
-                    "summary" : "登入成功，回傳token，data欄位的值為token",
-                    "value" : {
-                      "code" : 1,
-                      "msg" : "執行成功",
-                      "desc" : "操作已成功執行",
-                      "timestamp" : 1749798730,
-                      "time" : "2025/06/13 15:12:10",
-                      "data" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Nlbm92YS5haS9pc3N1ZXIiLCJ1cG4iOiJhcHB1c2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYXBwdXNlciIsImdyb3VwcyI6WyJ1c2VyIl0sImlhdCI6MTc0OTc5ODczMCwiZXhwIjoxNzQ5ODAyMzMwLCJqdGkiOiJkMmZiNjFmNC1lNDdjLTQ0OTMtYjA3YS0yYmRjMmUxNDUwODcifQ.aX3Knzc8vYV8rJpkv7TT1U7n2JdqDsUWMh1RWgUtra--7Z3JfRQRfHpFkU01phh3x2ZhDrAsokyRweDSDWD6UC5U2vkE06lhB0V8JQBGEVR9fDvSStv0vfKOOowUSdXrB00FY5uYHVqO143e71a28MvWgvBUU5m5hjhSkPTGkUcORzbJxr55LAV7-ie4-MRj8r1IF2f5mVLCsp0pIcSqP5XdIX5ifwKSaB1PtHcmPci5HZbXfbkhxKpJPgKg3qq8CKie8ublCeTWSuIXJiKX-oUEpLq2wKst0-wYDk1e1P4OmwHfTBUmcZ59fxL8YfSM-PY_xz7wSwXlBBRXby2ROw"
-                    }
+        "responses": {
+          "200": {
+            "description": "查詢成功，data欄位的值為預約的列表資料",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "執行成功": {
+                    "summary": "查詢成功，data欄位的值為預約的列表資料",
+                    "value": "    {\n        \"code\": 1,\n        \"msg\": \"執行成功\",\n        \"desc\": \"操作已成功執行\",\n        \"timestamp\": 1749798730,\n        \"time\": \"2025/06/13 15:12:10\",\n        \"data\": {}\n"
                   },
-                  "參數格式錯誤" : {
-                    "summary" : "請檢查參數格式是否正確",
-                    "value" : {
-                      "code" : -2,
-                      "msg" : "參數: 'username' 是必填欄位。",
-                      "desc" : "請求參數格式驗證失敗，請檢查格式是否正確",
-                      "timestamp" : 1749807435,
-                      "time" : "2025/06/13 17:37:15"
-                    }
-                  },
-                  "登入失敗" : {
-                    "summary" : "登入失敗，請確認帳號密碼是否正確",
-                    "value" : {
-                      "code" : -3,
-                      "msg" : "登入失敗",
-                      "desc" : "登入失敗，請確認帳號密碼是否正確",
-                      "timestamp" : 1749808409,
-                      "time" : "2025/06/13 17:53:29"
+                  "參數格式錯誤": {
+                    "summary": "請檢查參數格式是否正確",
+                    "value": {
+                      "code": -2,
+                      "msg": "參數: 'customer_id' 是必填欄位。",
+                      "desc": "請求參數格式驗證失敗，請檢查格式是否正確",
+                      "timestamp": 1749807435,
+                      "time": "2025/06/13 17:37:15"
                     }
                   }
                 },
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponseObject"
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
                 }
               }
             }
           },
-          "400" : {
-            "description" : "Bad Request"
+          "401": {
+            "description": "Token驗証失敗",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": -3,
+                  "msg": "Token驗証失敗",
+                  "desc": "未授權的請求",
+                  "timestamp": 1749802840,
+                  "time": "2025/06/13 16:20:40"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
-        "tags" : [ "Auth Controller" ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Appointment Controller"
+        ]
       }
     },
-    "/api/treatment/list" : {
-      "post" : {
-        "summary" : "API 1: 我的療程列表",
-        "description" : "透過 customer_id 取得療程的列表資料, 若有指定診所id（branches_id array） 需要搜尋對應診所",
-        "parameters" : [ {
-          "description" : "API的基本驗證字串，會由Senova同仁提供",
-          "example" : "f504bcc7a6a42750331d3c2d23703b2b",
-          "in" : "header",
-          "name" : "Auth",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+    "/api/auth/login": {
+      "post": {
+        "summary": "API 0: API使用者登入",
+        "description": "提供外部API使用端登入取得token，以利後續API使用",
+        "parameters": [
+          {
+            "description": "API的基本驗證字串，會由Senova同仁提供",
+            "example": "f504bcc7a6a42750331d3c2d23703b2b",
+            "in": "header",
+            "name": "Auth",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        } ],
-        "requestBody" : {
-          "description" : "透過 customer_id 取得療程的列表資料",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/TreatmentListRequest"
+        ],
+        "requestBody": {
+          "description": "透過username, password登入取得token，以利後續API使用",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           },
-          "required" : true
+          "required": true
         },
-        "responses" : {
-          "200" : {
-            "description" : "查詢成功，data欄位的值為療程的列表資料",
-            "content" : {
-              "application/json" : {
-                "examples" : {
-                  "執行成功" : {
-                    "summary" : "查詢成功，data欄位的值為療程的列表資料",
-                    "value" : "    {\n        \"code\": 1,\n        \"msg\": \"執行成功\",\n        \"desc\": \"操作已成功執行\",\n        \"timestamp\": 1749798730,\n        \"time\": \"2025/06/13 15:12:10\",\n        \"data\": {}\n"
+        "responses": {
+          "200": {
+            "description": "登入成功，回傳token，data欄位的值為token",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "執行成功": {
+                    "summary": "登入成功，回傳token，data欄位的值為token",
+                    "value": {
+                      "code": 1,
+                      "msg": "執行成功",
+                      "desc": "操作已成功執行",
+                      "timestamp": 1749798730,
+                      "time": "2025/06/13 15:12:10",
+                      "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Nlbm92YS5haS9pc3N1ZXIiLCJ1cG4iOiJhcHB1c2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYXBwdXNlciIsImdyb3VwcyI6WyJ1c2VyIl0sImlhdCI6MTc0OTc5ODczMCwiZXhwIjoxNzQ5ODAyMzMwLCJqdGkiOiJkMmZiNjFmNC1lNDdjLTQ0OTMtYjA3YS0yYmRjMmUxNDUwODcifQ.aX3Knzc8vYV8rJpkv7TT1U7n2JdqDsUWMh1RWgUtra--7Z3JfRQRfHpFkU01phh3x2ZhDrAsokyRweDSDWD6UC5U2vkE06lhB0V8JQBGEVR9fDvSStv0vfKOOowUSdXrB00FY5uYHVqO143e71a28MvWgvBUU5m5hjhSkPTGkUcORzbJxr55LAV7-ie4-MRj8r1IF2f5mVLCsp0pIcSqP5XdIX5ifwKSaB1PtHcmPci5HZbXfbkhxKpJPgKg3qq8CKie8ublCeTWSuIXJiKX-oUEpLq2wKst0-wYDk1e1P4OmwHfTBUmcZ59fxL8YfSM-PY_xz7wSwXlBBRXby2ROw"
+                    }
                   },
-                  "參數格式錯誤" : {
-                    "summary" : "請檢查參數格式是否正確",
-                    "value" : {
-                      "code" : -2,
-                      "msg" : "參數: 'customer_id' 是必填欄位。",
-                      "desc" : "請求參數格式驗證失敗，請檢查格式是否正確",
-                      "timestamp" : 1749807435,
-                      "time" : "2025/06/13 17:37:15"
+                  "參數格式錯誤": {
+                    "summary": "請檢查參數格式是否正確",
+                    "value": {
+                      "code": -2,
+                      "msg": "參數: 'username' 是必填欄位。",
+                      "desc": "請求參數格式驗證失敗，請檢查格式是否正確",
+                      "timestamp": 1749807435,
+                      "time": "2025/06/13 17:37:15"
+                    }
+                  },
+                  "登入失敗": {
+                    "summary": "登入失敗，請確認帳號密碼是否正確",
+                    "value": {
+                      "code": -3,
+                      "msg": "登入失敗",
+                      "desc": "登入失敗，請確認帳號密碼是否正確",
+                      "timestamp": 1749808409,
+                      "time": "2025/06/13 17:53:29"
                     }
                   }
                 },
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponseObject"
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Token驗証失敗",
-            "content" : {
-              "application/json" : {
-                "example" : {
-                  "code" : -3,
-                  "msg" : "Token驗証失敗",
-                  "desc" : "未授權的請求",
-                  "timestamp" : 1749802840,
-                  "time" : "2025/06/13 16:20:40"
-                },
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponseObject"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Bad Request"
+          "400": {
+            "description": "Bad Request"
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ],
-        "tags" : [ "Treatment Controller" ]
+        "tags": [
+          "Auth Controller"
+        ]
+      }
+    },
+    "/api/clinic/list": {
+      "post": {
+        "summary": "API 4: 診所列表",
+        "description": "預期透過 branches_id (array) 取得診所的列表資料",
+        "parameters": [
+          {
+            "description": "API的基本驗證字串，會由Senova同仁提供",
+            "example": "f504bcc7a6a42750331d3c2d23703b2b",
+            "in": "header",
+            "name": "Auth",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "透過 customer_id 取得診所的列表資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClinicRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "查詢成功，data欄位的值為診所的列表資料",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "執行成功": {
+                    "summary": "查詢成功，data欄位的值為診所的列表資料",
+                    "value": "    {\n        \"code\": 1,\n        \"msg\": \"執行成功\",\n        \"desc\": \"操作已成功執行\",\n        \"timestamp\": 1749798730,\n        \"time\": \"2025/06/13 15:12:10\",\n        \"data\": {}\n"
+                  },
+                  "參數格式錯誤": {
+                    "summary": "請檢查參數格式是否正確",
+                    "value": {
+                      "code": -2,
+                      "msg": "參數: 'customer_id' 是必填欄位。",
+                      "desc": "請求參數格式驗證失敗，請檢查格式是否正確",
+                      "timestamp": 1749807435,
+                      "time": "2025/06/13 17:37:15"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token驗証失敗",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": -3,
+                  "msg": "Token驗証失敗",
+                  "desc": "未授權的請求",
+                  "timestamp": 1749802840,
+                  "time": "2025/06/13 16:20:40"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Clinic Controller"
+        ]
+      }
+    },
+    "/api/clinic/listByMedicalServiceId": {
+      "post": {
+        "summary": "API 5 療程代碼取得診所",
+        "description": "預期透過treatment_id取得診所的列表資料",
+        "parameters": [
+          {
+            "description": "API的基本驗證字串，會由Senova同仁提供",
+            "example": "f504bcc7a6a42750331d3c2d23703b2b",
+            "in": "header",
+            "name": "Auth",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "預期透過treatment_id取得診所的列表資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClinicRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "查詢成功，data欄位的值為診所的列表資料",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "執行成功": {
+                    "summary": "查詢成功，data欄位的值為診所的列表資料",
+                    "value": "    {\n        \"code\": 1,\n        \"msg\": \"執行成功\",\n        \"desc\": \"操作已成功執行\",\n        \"timestamp\": 1749798730,\n        \"time\": \"2025/06/13 15:12:10\",\n        \"data\": {}\n"
+                  },
+                  "參數格式錯誤": {
+                    "summary": "請檢查參數格式是否正確",
+                    "value": {
+                      "code": -2,
+                      "msg": "參數: 'customer_id' 是必填欄位。",
+                      "desc": "請求參數格式驗證失敗，請檢查格式是否正確",
+                      "timestamp": 1749807435,
+                      "time": "2025/06/13 17:37:15"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token驗証失敗",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": -3,
+                  "msg": "Token驗証失敗",
+                  "desc": "未授權的請求",
+                  "timestamp": 1749802840,
+                  "time": "2025/06/13 16:20:40"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Clinic Controller"
+        ]
+      }
+    },
+    "/api/treatment/list": {
+      "post": {
+        "summary": "API 1: 我的療程列表",
+        "description": "透過 customer_id 取得療程的列表資料, 若有指定診所id（branches_id array） 需要搜尋對應診所",
+        "parameters": [
+          {
+            "description": "API的基本驗證字串，會由Senova同仁提供",
+            "example": "f504bcc7a6a42750331d3c2d23703b2b",
+            "in": "header",
+            "name": "Auth",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "透過 customer_id 取得療程的列表資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TreatmentListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "查詢成功，data欄位的值為療程的列表資料",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "執行成功": {
+                    "summary": "查詢成功，data欄位的值為療程的列表資料",
+                    "value": "    {\n        \"code\": 1,\n        \"msg\": \"執行成功\",\n        \"desc\": \"操作已成功執行\",\n        \"timestamp\": 1749798730,\n        \"time\": \"2025/06/13 15:12:10\",\n        \"data\": {}\n"
+                  },
+                  "參數格式錯誤": {
+                    "summary": "請檢查參數格式是否正確",
+                    "value": {
+                      "code": -2,
+                      "msg": "參數: 'customer_id' 是必填欄位。",
+                      "desc": "請求參數格式驗證失敗，請檢查格式是否正確",
+                      "timestamp": 1749807435,
+                      "time": "2025/06/13 17:37:15"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token驗証失敗",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": -3,
+                  "msg": "Token驗証失敗",
+                  "desc": "未授權的請求",
+                  "timestamp": 1749802840,
+                  "time": "2025/06/13 16:20:40"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Treatment Controller"
+        ]
       }
     }
   },
-  "info" : {
-    "title" : "senova-bms API",
-    "version" : "1.0.0-SNAPSHOT"
+  "info": {
+    "title": "senova-bms API",
+    "version": "senova-bms-20250619_221428"
   },
-  "servers" : [ {
-    "url" : "http://localhost:8081",
-    "description" : "Auto generated value"
-  }, {
-    "url" : "http://0.0.0.0:8081",
-    "description" : "Auto generated value"
-  } ]
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Auto generated value"
+    },
+    {
+      "url": "http://0.0.0.0:8081",
+      "description": "Auto generated value"
+    }
+  ]
 }
