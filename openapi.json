@@ -144,6 +144,34 @@
           "data": {}
         }
       },
+      "ResponseObjectMapStringString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "time": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "TreatmentListRequest": {
         "type": "object",
         "required": [
@@ -592,11 +620,31 @@
           "Treatment Controller"
         ]
       }
+    },
+    "/version": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseObjectMapStringString"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Version",
+        "tags": [
+          "Version Controller"
+        ]
+      }
     }
   },
   "info": {
     "title": "senova-bms API",
-    "version": "senova-bms-20250619_221428"
+    "version": "senova-bms-20250619_224007"
   },
   "servers": [
     {
