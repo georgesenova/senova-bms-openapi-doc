@@ -451,7 +451,7 @@
         ]
       }
     },
-    "/api/clinic/listByMedicalServiceId": {
+    "/api/clinic/list_by_medical_service": {
       "post": {
         "summary": "API 5 療程代碼取得診所",
         "description": "預期透過treatment_id取得診所的列表資料",
@@ -644,7 +644,7 @@
   },
   "info": {
     "title": "senova-bms API",
-    "version": "senova-bms-20250619_224452"
+    "version": "senova-bms-20250620_092311"
   },
   "servers": [
     {
