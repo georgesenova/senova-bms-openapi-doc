@@ -204,7 +204,7 @@
     "/api/appointment/list": {
       "post": {
         "summary": "API 2: 我的預約列表",
-        "description": "透過 customer_id 取得預約的列表資料, 若有指定診所id（branches_id array） 需要搜尋對應診所",
+        "description": "透過 customer_id 取得預約的列表資料, 若有指定診所id（branch_id array） 需要搜尋對應診所",
         "parameters": [
           {
             "description": "API的基本驗證字串，會由Senova同仁提供",
@@ -539,7 +539,7 @@
     "/api/treatment/list": {
       "post": {
         "summary": "API 1: 我的療程列表",
-        "description": "透過 customer_id 取得療程的列表資料, 若有指定診所id（branches_id array） 需要搜尋對應診所",
+        "description": "透過 customer_id 取得療程的列表資料, 若有指定診所id（branch_id array） 需要搜尋對應診所",
         "parameters": [
           {
             "description": "API的基本驗證字串，會由Senova同仁提供",
@@ -644,7 +644,7 @@
   },
   "info": {
     "title": "senova-bms API",
-    "version": "senova-bms-20250620_092311"
+    "version": "senova-bms-20250620_134043"
   },
   "servers": [
     {
